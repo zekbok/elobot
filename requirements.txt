@@ -1,3 +1,5 @@
 discord
+logging
+sys
 config
 requests
