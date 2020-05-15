@@ -1,2 +1,1 @@
-  
-worker: python3 elobot.py
+  worker: python3 elobot.py
