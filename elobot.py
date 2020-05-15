@@ -140,7 +140,7 @@ async def on_message(message: discord.Message):
                 search = args[1]
 
             # Query the leaderboard API
-            leaderboard: Response = api.leaderboard(search=search)
+            leaderboard: Response = api.leaderboard(search=search, leaderboard_id=3)
 
             if not leaderboard.ok:
                 await message.channel.send(F"<@{message.author.id}> "
