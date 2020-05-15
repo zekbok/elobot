@@ -44,23 +44,23 @@ client = discord.Client()
 
 # LOGGING
 
-logformat = '%(asctime)-19s %(name)s %(lineno)-3s %(levelname)-8s: %(message)s'
-logfilename = 'elobot.log'
+#logformat = '%(asctime)-19s %(name)s %(lineno)-3s %(levelname)-8s: %(message)s'
+#logfilename = 'elobot.log'
 
-if len(sys.argv) > 1 and sys.argv[1] in ['-d', '--debug'] or config.LOGLEVEL == 'debug':
-    logging.basicConfig(format=logformat, level=logging.DEBUG)
+#if len(sys.argv) > 1 and sys.argv[1] in ['-d', '--debug'] or config.LOGLEVEL == 'debug':
+#    logging.basicConfig(format=logformat, level=logging.DEBUG)
 
-elif len(sys.argv) > 1 and sys.argv[1] in ['-i', '--info'] or config.LOGLEVEL == 'info':
-    logging.basicConfig(filename=logfilename, format=logformat, level=logging.INFO)
+#elif len(sys.argv) > 1 and sys.argv[1] in ['-i', '--info'] or config.LOGLEVEL == 'info':
+#    logging.basicConfig(filename=logfilename, format=logformat, level=logging.INFO)
 
-else:
-    logging.basicConfig(filename=logfilename, format=logformat, level=logging.WARN)
+#else:
+#    logging.basicConfig(filename=logfilename, format=logformat, level=logging.WARN)
 
-log = logging.getLogger(__name__)
-logging.getLogger('discord.gateway').setLevel(logging.WARNING)
-logging.getLogger('discord.client').setLevel(logging.WARNING)
-logging.getLogger('websockets.protocol').setLevel(logging.WARN)
-log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
+#log = logging.getLogger(__name__)
+#logging.getLogger('discord.gateway').setLevel(logging.WARNING)
+#logging.getLogger('discord.client').setLevel(logging.WARNING)
+#logging.getLogger('websockets.protocol').setLevel(logging.WARN)
+#log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
 @client.event
 async def on_ready():
