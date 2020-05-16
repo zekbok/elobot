@@ -139,9 +139,11 @@ async def on_message(message: discord.Message):
                 #                            F'search parameter was "{words[1]}"')
                 search = args[1]
                 
-                if args[2] == '-teamelo':
-                    
+              
+            if arg.__len__() == 3:
+                if args[2] == '-teamelo':  
                     leaderboard_id = 4
+                    search = args[1]
             
             # Query the leaderboard API
             leaderboard: Response = api.leaderboard(search=search, leaderboard_id=leaderboard_id)
