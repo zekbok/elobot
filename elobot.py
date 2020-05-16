@@ -145,13 +145,13 @@ async def on_message(message: discord.Message):
                 if args[2] == '-teamelo':  
                     leaderboard_id = 4
                     search = args[1]
-                 elif args[2] == '-dm':  
+                elif args[2] == '-dm':  
                     leaderboard_id = 1
                     search = args[1]
-                 elif args[2] == '-teamdm':  
+                elif args[2] == '-teamdm':  
                     leaderboard_id = 2
                     search = args[1]
-                 elif args[2] == '-unranked':  
+                elif args[2] == '-unranked':  
                     leaderboard_id = 0
                     search = args[1]
             
