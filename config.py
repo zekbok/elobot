@@ -15,7 +15,7 @@ LOGLEVEL = 'info'
 # ----------------
 # Your secret discord token 
 # DISCORD_TOKEN = ''
-DISCORD_TOKEN = ''
+DISCORD_TOKEN = process.env.DISCORD_TOKEN
 
 # Trigger that the bot will react to in your channels. 
 # DISCORD_TRIGGER = '!elo'
