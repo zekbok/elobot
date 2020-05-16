@@ -127,7 +127,7 @@ async def on_message(message: discord.Message):
             # pdb.set_trace()
 
             api = Aoe2netAPI()
-            leaderboard_id = None
+            leaderboard_id = 3
             # search = None
 
             if args.__len__() == 1:
