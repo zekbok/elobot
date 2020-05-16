@@ -145,6 +145,15 @@ async def on_message(message: discord.Message):
                 if args[2] == '-teamelo':  
                     leaderboard_id = 4
                     search = args[1]
+                 if args[2] == '-dm':  
+                    leaderboard_id = 1
+                    search = args[1]
+                 if args[2] == '-teamdm':  
+                    leaderboard_id = 2
+                    search = args[1]
+                 if args[2] == '-unranked':  
+                    leaderboard_id = 0
+                    search = args[1]
             
             # Query the leaderboard API
             leaderboard: Response = api.leaderboard(search=search, leaderboard_id=leaderboard_id)
