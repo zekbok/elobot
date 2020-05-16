@@ -110,7 +110,8 @@ async def on_message(message: discord.Message):
                 elif args[1] == '-help':
                     await message.channel.send(F"<@{message.author.id}> \n"
                                                F"`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ]`")
+                                               F"[<search string> | -help | -invite | -about ]`"
+                                               F"[<search string> -teamelo | <search string> -dm | <search string> -teamdm | <search string> -unranked ]'")
                     return
                 elif args[1] == '-invite':
                     await message.channel.send(F"<@{message.author.id}> \n"
@@ -135,6 +136,16 @@ async def on_message(message: discord.Message):
                 #                            F'you did not provide any parameters, so I will '
                 #                            F'search for your Name "{message.author.name}".')
                 search = message.author.name
+                
+                if args[1] == '-teamelo':
+                    leaderboard_id = 4
+                elif args[1] == '-dm':
+                    leaderboard_id = 1
+                elif args[1] == '-unranked':
+                    leaderboard_id = 0
+                elif args[1] == '-teamdm':
+                    leaderboard_id = 2
+            
             else:
                 # await message.channel.send(F'<@{message.author.id}> \nDEBUG your message started with "{words[0]}", '
                 #                            F'search parameter was "{words[1]}"')
