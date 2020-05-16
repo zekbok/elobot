@@ -87,7 +87,7 @@ async def on_message(message: discord.Message):
         log.info(s)
 
         # read arguments
-        args = message.content.split(' ', 1)
+        args = message.content.split(' ', 2)
 
 
         if args[0] == config.DISCORD_TRIGGER:
@@ -117,7 +117,7 @@ async def on_message(message: discord.Message):
                                                F"You can invite this bot to your Discord using this link: \n"
                                                F"https://discord.com/api/oauth2/authorize"                                       
                                                F"?client_id=707630937252298864&permissions=19456&scope=bot")
-
+                  
                     return
 
             # done: call API, write results to chat
@@ -127,6 +127,7 @@ async def on_message(message: discord.Message):
             # pdb.set_trace()
 
             api = Aoe2netAPI()
+            leaderboard_id = 3
             # search = None
 
             if args.__len__() == 1:
@@ -138,9 +139,15 @@ async def on_message(message: discord.Message):
                 # await message.channel.send(F'<@{message.author.id}> \nDEBUG your message started with "{words[0]}", '
                 #                            F'search parameter was "{words[1]}"')
                 search = args[1]
-
+                
+              
+            if args.__len__() == 3:
+                if args[2] == '-teamelo':  
+                    leaderboard_id = 4
+                    search = args[1]
+            
             # Query the leaderboard API
-            leaderboard: Response = api.leaderboard(search=search)
+            leaderboard: Response = api.leaderboard(search=search, leaderboard_id=leaderboard_id)
 
             if not leaderboard.ok:
                 await message.channel.send(F"<@{message.author.id}> "
