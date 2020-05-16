@@ -5,6 +5,8 @@
 # Remember: 
 # Do not make this file public, after you have set your secret values.
 
+import os
+
 # Logging
 # -------
 # This is optional. If ommited, defaults to warning. 
@@ -15,7 +17,7 @@ LOGLEVEL = 'info'
 # ----------------
 # Your secret discord token 
 # DISCORD_TOKEN = ''
-DISCORD_TOKEN = process.env.DISCORD_TOKEN
+DISCORD_TOKEN = os.environ['DISCORD_TOKEN']
 
 # Trigger that the bot will react to in your channels. 
 # DISCORD_TRIGGER = '!elo'
