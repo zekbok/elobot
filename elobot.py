@@ -87,7 +87,7 @@ async def on_message(message: discord.Message):
         log.info(s)
 
         # read arguments
-        args = message.content.split(' ', 1)
+        args = message.content.split(' ', 2)
 
 
         if args[0] == config.DISCORD_TRIGGER:
