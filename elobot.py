@@ -140,7 +140,7 @@ async def on_message(message: discord.Message):
                 search = args[1]
                 
               
-            if arg.__len__() == 3:
+            if args.__len__() == 3:
                 if args[2] == '-teamelo':  
                     leaderboard_id = 4
                     search = args[1]
