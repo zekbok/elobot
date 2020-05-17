@@ -71,7 +71,7 @@ async def currentgame(message: discord.Message):
         await message.channel.send(F"<@{message.author.id}> "
             F'An error occured while trying to query the API. Please try again later. '
             F'**(It''s not your fault.)**'
-            F'{message.author.id}')
+            F'{steam_id}')
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
