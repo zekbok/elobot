@@ -63,7 +63,7 @@ logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
 async def currentgame(message: discord.Message):
-
+    api = Aoe2netAPI()
     #get players
     lastmatch: Response = api.lastmatch(steam_id = message.author.id)
     
