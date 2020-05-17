@@ -81,7 +81,7 @@ async def currentgame(message: discord.Message):
         return
     else:
         resultleaderboard = leaderboard.json
-        if resultleaderboard["count"] = 1:
+        if resultleaderboard["count"] == 1:
             steam_id = resultleaderboard[0]["steam_id"]
         else:
             await message.channel.send(F"<@{message.author.id}> "
