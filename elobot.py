@@ -86,7 +86,7 @@ async def currentgame(message: discord.Message):
     lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
     if not lastmatch.ok:
-        await message.channel.send(steam_id)
+        await message.channel.send(errorstring(message))
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
