@@ -151,7 +151,7 @@ async def on_message(message: discord.Message):
                     return
                 
                 elif args[1] == '-curgame':
-                    currentgame(message)
+                    await currentgame(message)
                     return
 
             # done: call API, write results to chat
