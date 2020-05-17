@@ -72,7 +72,7 @@ async def currentgame(message: discord.Message):
             F'An error occured while trying to query the API. Please try again later. '
             F'**(It''s not your fault.)**')
         #log.warning(f'API Response was not OK. {lastmatch}')
-
+        return
     else:
         result = lastmatch.json()
         
