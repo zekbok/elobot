@@ -74,19 +74,15 @@ def errorstring(message: discord.Message):
 async def currentgame(message: discord.Message):
     api = Aoe2netAPI()
     
-    leaderboard: Response = api.leaderboard(search = message.author.name)
+    leaderboard: Response = api.leaderboard(search = message.author.name, leaderboard_id = 3)
     
     if not leaderboard.ok:
         await message.channel.send(errorstring(message))
         return
     else:
+        
         resultlb = leaderboard.json
-        if resultlb["count"] == 1:
-            steam_id = resultlb["leaderboard"][0]["steam_id"]
-        else:
-            await message.channel.send(F"<@{message.author.id}> "
-            F'Sorry, there was no result for *{search}*.')
-            return
+        steam_id = resultlb["leaderboard"][0]["steam_id"]
             
     lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
