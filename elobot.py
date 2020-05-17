@@ -62,6 +62,35 @@ logging.getLogger('discord.client').setLevel(logging.WARNING)
 logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
+async def currentgame(message: discord.Message):
+
+    #get players
+    lastmatch: Response = api.lastmatch(steam_id = message.author.id)
+    
+    if not lastmatch.ok:
+        await message.channel.send(F"<@{message.author.id}> "
+            F'An error occured while trying to query the API. Please try again later. '
+            F'**(It''s not your fault.)**')
+        #log.warning(f'API Response was not OK. {lastmatch}')
+
+    else:
+        result = lastmatch.json()
+        
+    discordmessage = F"<@{message.author.id}> \n"
+    F'***Age of Empires II DE Leaderboard***\n'
+        
+    for player in result["players"]:
+        
+        name = result["players"][player]["name"]
+        rank = result["players"][player]["rank"]
+        rating = result["players"][player]["rating"]
+        discordmessage = discordmessage + F'**Name:** {name}, '
+        F'**Rank:** {rank}, '
+        F'**Rating:** {rating}'
+    await message.channel.send(discordmessage)
+
+
+
 @client.event
 async def on_ready():
     log.info(f'We have logged in as {client.user}')
@@ -191,30 +220,5 @@ async def on_message(message: discord.Message):
 client.run(config.DISCORD_TOKEN)
 
 
-async def currentgame(message: discord.Message):
 
-    #get players
-    lastmatch: Response = api.lastmatch(steam_id = message.author.id)
-    
-    if not lastmatch.ok:
-        await message.channel.send(F"<@{message.author.id}> "
-            F'An error occured while trying to query the API. Please try again later. '
-            F'**(It''s not your fault.)**')
-        #log.warning(f'API Response was not OK. {lastmatch}')
-
-    else:
-        result = lastmatch.json()
-        
-    discordmessage = F"<@{message.author.id}> \n"
-    F'***Age of Empires II DE Leaderboard***\n'
-        
-    for player in result["players"]:
-        
-        name = result["players"][player]["name"]
-        rank = result["players"][player]["rank"]
-        rating = result["players"][player]["rating"]
-        discordmessage = discordmessage + F'**Name:** {name}, '
-        F'**Rank:** {rank}, '
-        F'**Rating:** {rating}'
-    await message.channel.send(discordmessage)
                 
