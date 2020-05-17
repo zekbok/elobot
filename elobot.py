@@ -62,7 +62,7 @@ logging.getLogger('discord.client').setLevel(logging.WARNING)
 logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
-def errorstring()
+def errorstring(message: discord.Message)
 
     string = F"<@{message.author.id}> "
     F'An error occured while trying to query the API. Please try again later. '
@@ -77,7 +77,7 @@ async def currentgame(message: discord.Message):
     leaderboard: Response = api.leaderboard(search = message.author.name)
     
     if not leaderboard.ok:
-        await message.channel.send(errorstring())
+        await message.channel.send(errorstring(message))
         return
     else:
         resultleaderboard = leaderboard.json
@@ -91,7 +91,7 @@ async def currentgame(message: discord.Message):
     lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
     if not lastmatch.ok:
-        await message.channel.send(errorstring())
+        await message.channel.send(errorstring(message))
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
