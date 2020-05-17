@@ -74,7 +74,7 @@ def errorstring(message: discord.Message):
 async def currentgame(message: discord.Message):
     api = Aoe2netAPI()
     
-    leaderboard: Response = api.leaderboard(search = message.author.name, leaderboard_id = 3)
+    leaderboard: Response = api.leaderboard(search=message.author.name, leaderboard_id=3)
     
     if not leaderboard.ok:
         await message.channel.send(errorstring(message))
@@ -83,7 +83,7 @@ async def currentgame(message: discord.Message):
         resultlb = leaderboard.json()
         steam_id = resultlb["leaderboard"][0]["steam_id"]
             
-    lastmatch: Response = api.lastmatch(steam_id = steam_id)
+    lastmatch: Response = api.lastmatch(steam_id=steam_id)
     
     if not lastmatch.ok:
         await message.channel.send(errorstring(message))
