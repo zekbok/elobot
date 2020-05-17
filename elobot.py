@@ -80,9 +80,9 @@ async def currentgame(message: discord.Message):
         await message.channel.send(errorstring(message))
         return
     else:
-        resultleaderboard = leaderboard.json
-        if resultleaderboard["count"] == 1:
-            steam_id = resultleaderboard[0]["steam_id"]
+        resultlb = leaderboard.json
+        if resultlb["count"] == 1:
+            steam_id = resultlb["leaderboard"][0]["steam_id"]
         else:
             await message.channel.send(F"<@{message.author.id}> "
             F'Sorry, there was no result for *{search}*.')
