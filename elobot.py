@@ -122,7 +122,7 @@ async def on_message(message: discord.Message):
                     return
                 
                 elif args[1] == '-curgame':
-                    currentgame()
+                    currentgame(message)
                     return
 
             # done: call API, write results to chat
@@ -191,7 +191,7 @@ async def on_message(message: discord.Message):
 client.run(config.DISCORD_TOKEN)
 
 
-def currentgame():
+def currentgame(message: str = None):
 
     #get players
     lastmatch: Response = api.lastmatch(steam_id = message.author.id)
