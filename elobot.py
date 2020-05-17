@@ -62,7 +62,7 @@ logging.getLogger('discord.client').setLevel(logging.WARNING)
 logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
-def errorstring(message: discord.Message)
+def errorstring(message: discord.Message):
 
     string = F"<@{message.author.id}> "
     F'An error occured while trying to query the API. Please try again later. '
