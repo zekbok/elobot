@@ -66,7 +66,7 @@ def errorstring(message: discord.Message):
 
     string = F"<@{message.author.id}> "
     F'An error occured while trying to query the API. Please try again later. '
-    F'**(It''s not your fault.)**')
+    F'**(It''s not your fault.)**'
 
     return string
 
