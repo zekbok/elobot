@@ -81,10 +81,10 @@ async def currentgame(message: discord.Message):
         return
     else:
         
-        resultlb = leaderboard.json
-        steam_id = resultlb["leaderboard"][0]["steam_id"]
+        #resultlb = leaderboard.json
+        #steam_id = resultlb["leaderboard"][0]["steam_id"]
             
-    lastmatch: Response = api.lastmatch(steam_id = steam_id)
+    lastmatch: Response = api.lastmatch(steam_id = 76561198913301772)
     
     if not lastmatch.ok:
         await message.channel.send(errorstring(message))
