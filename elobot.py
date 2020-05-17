@@ -62,16 +62,36 @@ logging.getLogger('discord.client').setLevel(logging.WARNING)
 logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
+def errorstring()
+
+    string = F"<@{message.author.id}> "
+    F'An error occured while trying to query the API. Please try again later. '
+    F'**(It''s not your fault.)**')
+
+    return string
+
+
 async def currentgame(message: discord.Message):
     api = Aoe2netAPI()
-    #get players
-    lastmatch: Response = api.lastmatch(steam_id = message.author.id)
+    
+    leaderboard: Response = api.leaderboard(search = message.author.name)
+    
+    if not leaderboard.ok:
+        await message.channel.send(errorstring())
+        return
+    else:
+        resultleaderboard = leaderboard.json
+        if resultleaderboard["count"] = 1:
+            steam_id = resultleaderboard[0]["steam_id"]
+        else:
+            await message.channel.send(F"<@{message.author.id}> "
+            F'Sorry, there was no result for *{search}*.')
+            return
+            
+    lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
     if not lastmatch.ok:
-        await message.channel.send(F"<@{message.author.id}> "
-            F'An error occured while trying to query the API. Please try again later. '
-            F'**(It''s not your fault.)**'
-            F'{steam_id}')
+        await message.channel.send(errorstring())
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
