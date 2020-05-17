@@ -79,7 +79,7 @@ async def currentgame(message: discord.Message):
     if not leaderboard.ok:
         await message.channel.send(errorstring(message))
         return
-    else:
+    #else:
         
         #resultlb = leaderboard.json
         #steam_id = resultlb["leaderboard"][0]["steam_id"]
