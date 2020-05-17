@@ -64,9 +64,9 @@ log.debug('Log Level is DEBUG, therefore writing all log to standard output (and
 
 def errorstring(message: discord.Message):
 
-    string = F"<@{message.author.id}> "
+    string = (F"<@{message.author.id}> "
     F'An error occured while trying to query the API. Please try again later. '
-    F'**(It''s not your fault.)**'
+    F'**(It''s not your fault.)**')
 
     return string
 
@@ -77,7 +77,7 @@ async def currentgame(message: discord.Message):
     leaderboard: Response = api.leaderboard(search = message.author.name, leaderboard_id = 3)
     
     if not leaderboard.ok:
-        await message.channel.send('test0')
+        await message.channel.send(errorstring(message))
         return
     else:
         resultlb = leaderboard.json()
@@ -86,7 +86,7 @@ async def currentgame(message: discord.Message):
     lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
     if not lastmatch.ok:
-        await message.channel.send('test1')
+        await message.channel.send(steam_id)
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
