@@ -191,7 +191,7 @@ async def on_message(message: discord.Message):
 client.run(config.DISCORD_TOKEN)
 
 
-def currentgame(message: str = None):
+def currentgame(message: discord.Message):
 
     #get players
     lastmatch: Response = api.lastmatch(steam_id = message.author.id)
