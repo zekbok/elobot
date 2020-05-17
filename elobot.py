@@ -77,7 +77,7 @@ async def currentgame(message: discord.Message):
     leaderboard: Response = api.leaderboard(search = message.author.name, leaderboard_id = 3)
     
     if not leaderboard.ok:
-        await message.channel.send(errorstring(message))
+        await message.channel.send('test0')
         return
     else:
         resultlb = leaderboard.json()
@@ -86,7 +86,7 @@ async def currentgame(message: discord.Message):
     lastmatch: Response = api.lastmatch(steam_id = steam_id)
     
     if not lastmatch.ok:
-        await message.channel.send(errorstring(message))
+        await message.channel.send('test1')
         #log.warning(f'API Response was not OK. {lastmatch}')
         return
     else:
@@ -105,7 +105,7 @@ async def currentgame(message: discord.Message):
         F'**Rank:** {rank}, '
         F'**Rating:** {rating}'
         
-    await message.channel.send('test')
+    await message.channel.send(discordmessage)
 
 
 
