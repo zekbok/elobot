@@ -206,7 +206,7 @@ async def currentgame(message: discord.Message):
         result = lastmatch.json()
         
     discordmessage = F"<@{message.author.id}> \n"
-                     F'***Age of Empires II DE Leaderboard***\n'
+    F'***Age of Empires II DE Leaderboard***\n'
         
     for player in result["players"]:
         
@@ -214,8 +214,8 @@ async def currentgame(message: discord.Message):
         rank = result["players"][player]["rank"]
         rating = result["players"][player]["rating"]
         discordmessage = discordmessage + F'**Name:** {name}, '
-                          F'**Rank:** {rank}, '
-                          F'**Rating:** {rating}'
+        F'**Rank:** {rank}, '
+        F'**Rating:** {rating}'
                 
      await message.channel.send(discordmessage)
                 
