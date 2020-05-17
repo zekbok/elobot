@@ -110,7 +110,8 @@ async def on_message(message: discord.Message):
                 elif args[1] == '-help':
                     await message.channel.send(F"<@{message.author.id}> \n"
                                                F"`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ]`")
+                                               F"[<search string> | -help | -invite | -about ] \n`"
+                                               F"[<search string> -teamelo | <search string> -dm | <search string> -teamdm | <search string> -unranked ]`")
                     return
                 elif args[1] == '-invite':
                     await message.channel.send(F"<@{message.author.id}> \n"
@@ -118,6 +119,10 @@ async def on_message(message: discord.Message):
                                                F"https://discord.com/api/oauth2/authorize"                                       
                                                F"?client_id=707630937252298864&permissions=19456&scope=bot")
                   
+                    return
+                
+                elif args[1] == '-curgame':
+                    currentgame()
                     return
 
             # done: call API, write results to chat
@@ -135,6 +140,7 @@ async def on_message(message: discord.Message):
                 #                            F'you did not provide any parameters, so I will '
                 #                            F'search for your Name "{message.author.name}".')
                 search = message.author.name
+            
             else:
                 # await message.channel.send(F'<@{message.author.id}> \nDEBUG your message started with "{words[0]}", '
                 #                            F'search parameter was "{words[1]}"')
@@ -144,6 +150,15 @@ async def on_message(message: discord.Message):
             if args.__len__() == 3:
                 if args[2] == '-teamelo':  
                     leaderboard_id = 4
+                    search = args[1]
+                elif args[2] == '-dm':  
+                    leaderboard_id = 1
+                    search = args[1]
+                elif args[2] == '-teamdm':  
+                    leaderboard_id = 2
+                    search = args[1]
+                elif args[2] == '-unranked':  
+                    leaderboard_id = 0
                     search = args[1]
             
             # Query the leaderboard API
@@ -176,8 +191,31 @@ async def on_message(message: discord.Message):
 client.run(config.DISCORD_TOKEN)
 
 
+def currentgame():
 
+    #get players
+    lastmatch: Response = api.lastmatch(steam_id = message.author.id)
+    
+    if not lastmatch.ok:
+        await message.channel.send(F"<@{message.author.id}> "
+            F'An error occured while trying to query the API. Please try again later. '
+            F'**(It''s not your fault.)**')
+        log.warning(f'API Response was not OK. {lastmatch}')
 
-
-
-
+    else:
+        result = lastmatch.json()
+        
+    discordmessage = F"<@{message.author.id}> \n"
+                     F'***Age of Empires II DE Leaderboard***\n'
+        
+    for player in result["players"]:
+        
+        name = result["players"][player]["name"]
+        rank = result["players"][player]["rank"]
+        rating = result["players"][player]["rating"]
+        discordmessage = discordmessage + F'**Name:** {name}, '
+                          F'**Rank:** {rank}, '
+                          F'**Rating:** {rating}'
+                
+     await message.channel.send(discordmessage)
+                
