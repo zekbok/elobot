@@ -100,7 +100,7 @@ async def currentgame(message: discord.Message):
         name = player["name"]
         rating = player["rating"]
         
-        discordmessage = F'**Name:** {name}, '
+        discordmessage += F'**Name:** {name}, '
         F'**Rating:** {rating}, '
         
     await message.channel.send(discordmessage)
