@@ -85,8 +85,11 @@ class Aoe2netAPI(object):
 
     def lastmatch(self, game: str = 'aoe2de', steam_id: int = None, profile_id: str = None) -> Response:
         endpoint = '/api/player/lastmatch'
+        if profile_id == None:
+            profile_id = ""
+        if steam_id = None:
+            steam_id = ""
         query = f'?game={game}&steam_id={steam_id}&profile_id={profile_id}'
-        raise Exception(f'{endpoint}{query}')
         return self.fetch(endpoint, query)
 
     def matches(self, game: str = 'aoe2de', start: int = 1, count: int = 1,
