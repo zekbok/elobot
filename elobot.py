@@ -95,11 +95,11 @@ async def currentgame(message: discord.Message):
     discordmessage = F"<@{message.author.id}> \n"
     F'***Age of Empires II DE Leaderboard***\n'
         
-    for player in result["players"]:
+    for player in result["last_match"]["players"]:
         
-        name = result["players"][player]["name"]
-        rank = result["players"][player]["rank"]
-        rating = result["players"][player]["rating"]
+        name = result["last_match"]["players"][player]["name"]
+        rank = result["last_match"]["players"][player]["rank"]
+        rating = result["last_match"]["players"][player]["rating"]
         
         discordmessage = F'**Name:** {name}, '
         F'**Rank:** {rank}, '
