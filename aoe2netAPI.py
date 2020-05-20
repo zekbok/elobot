@@ -87,7 +87,7 @@ class Aoe2netAPI(object):
         endpoint = '/api/player/lastmatch'
         if profile_id == None:
             profile_id = ""
-        if steam_id = None:
+        if steam_id == None:
             steam_id = ""
         query = f'?game={game}&steam_id={steam_id}&profile_id={profile_id}'
         return self.fetch(endpoint, query)
