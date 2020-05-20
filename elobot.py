@@ -156,6 +156,7 @@ async def on_message(message: discord.Message):
                     await message.channel.send(F"<@{message.author.id}> \n"
                                                F"`{config.DISCORD_TRIGGER} "
                                                F"[<search string> | -curgame | -help | -invite | -about ] \n`"
+                                               F"`{config.DISCORD_TRIGGER} "
                                                F"[<search string> -teamelo | <search string> -dm | <search string> -teamdm | <search string> -unranked ]`")
                     return
                 elif args[1] == '-invite':
