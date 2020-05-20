@@ -101,7 +101,7 @@ async def currentgame(message: discord.Message):
         rating = player["rating"]
         
         discordmessage += F'**Name:** {name}, '
-        discordmessage += F'**Rating:** {rating}, \n'
+        discordmessage += F'**Rating:** {rating} \n'
         
     await message.channel.send(discordmessage)
 
@@ -149,13 +149,13 @@ async def on_message(message: discord.Message):
                                                F"**Steamcommunity group** "
                                                F"https://steamcommunity.com/groups/elostatsbot/announcements/ \n\n"
                                                F"**Usage:** \n`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ]`")
+                                               F"[<search string> | -curgame | -help | -invite | -about ]`")
                     return
 
                 elif args[1] == '-help':
                     await message.channel.send(F"<@{message.author.id}> \n"
                                                F"`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ] \n`"
+                                               F"[<search string> | -curgame | -help | -invite | -about ] \n`"
                                                F"[<search string> -teamelo | <search string> -dm | <search string> -teamdm | <search string> -unranked ]`")
                     return
                 elif args[1] == '-invite':
