@@ -97,9 +97,9 @@ async def currentgame(message: discord.Message):
         
     for player in result["last_match"]["players"]:
        
-        name = result["last_match"]["players"]["name"]
-        rank = result["last_match"]["players"]["rank"]
-        rating = result["last_match"]["players"]["rating"]
+        name = result["last_match"]["players"][player]["name"]
+        rank = result["last_match"]["players"][player]["rank"]
+        rating = result["last_match"]["players"][player]["rating"]
         
         discordmessage = F'**Name:** {name}, '
         F'**Rank:** {rank}, '
