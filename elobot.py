@@ -62,6 +62,51 @@ logging.getLogger('discord.client').setLevel(logging.WARNING)
 logging.getLogger('websockets.protocol').setLevel(logging.WARN)
 log.debug('Log Level is DEBUG, therefore writing all log to standard output (and not to logfile).')
 
+def errorstring(message: discord.Message):
+
+    string = (F"<@{message.author.id}> "
+    F'An error occured while trying to query the API. Please try again later. '
+    F'**(It''s not your fault.)**')
+
+    return string
+
+
+async def currentgame(message: discord.Message):
+    api = Aoe2netAPI()
+    
+    leaderboard: Response = api.leaderboard(search=message.author.name, leaderboard_id=3)
+    
+    if not leaderboard.ok:
+        await message.channel.send(errorstring(message))
+        return
+    else:
+        resultlb = leaderboard.json()
+        steam_id = resultlb["leaderboard"][0]["steam_id"]
+            
+    lastmatch: Response = api.lastmatch(steam_id=steam_id)
+    
+    if not lastmatch.ok:
+        await message.channel.send(errorstring(message))
+        #log.warning(f'API Response was not OK. {lastmatch}')
+        return
+    else:
+        result = lastmatch.json()
+        
+    discordmessage = F"<@{message.author.id}> \n"
+    F'***Age of Empires II DE Leaderboard***\n'
+        
+    for player in result["last_match"]["players"]:
+       
+        name = player["name"]
+        rating = player["rating"]
+        
+        discordmessage += F'**Name:** {name}, '
+        discordmessage += F'**Rating:** {rating} \n'
+        
+    await message.channel.send(discordmessage)
+
+
+
 @client.event
 async def on_ready():
     log.info(f'We have logged in as {client.user}')
@@ -104,13 +149,13 @@ async def on_message(message: discord.Message):
                                                F"**Steamcommunity group** "
                                                F"https://steamcommunity.com/groups/elostatsbot/announcements/ \n\n"
                                                F"**Usage:** \n`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ]`")
+                                               F"[<search string> | -curgame | -help | -invite | -about ]`")
                     return
 
                 elif args[1] == '-help':
                     await message.channel.send(F"<@{message.author.id}> \n"
                                                F"`{config.DISCORD_TRIGGER} "
-                                               F"[<search string> | -help | -invite | -about ] \n`"
+                                               F"[<search string> | -curgame | -help | -invite | -about ] \n`"
                                                F"[<search string> -teamelo | <search string> -dm | <search string> -teamdm | <search string> -unranked ]`")
                     return
                 elif args[1] == '-invite':
@@ -119,6 +164,10 @@ async def on_message(message: discord.Message):
                                                F"https://discord.com/api/oauth2/authorize"                                       
                                                F"?client_id=707630937252298864&permissions=19456&scope=bot")
                   
+                    return
+                
+                elif args[1] == '-curgame':
+                    await currentgame(message)
                     return
 
             # done: call API, write results to chat
@@ -188,7 +237,4 @@ client.run(config.DISCORD_TOKEN)
 
 
 
-
-
-
-
+                
