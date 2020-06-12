@@ -74,7 +74,8 @@ def errorstring(message: discord.Message):
 async def currentgame(message: discord.Message):
     api = Aoe2netAPI()
     
-    leaderboard: Response = api.leaderboard(search=message.author.name, leaderboard_id=3)
+    leaderboard: Response = api.leaderboard(search=message.author.name, leaderboard_id=4)
+    #need to fix assumption that the search for the player will be successful on a particular leaderboard
     
     if not leaderboard.ok:
         await message.channel.send(errorstring(message))
